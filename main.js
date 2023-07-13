@@ -2,16 +2,16 @@ let cuota = 0
 let montototal = 0
 
 let monto = parseFloat(prompt("ingrese mono a solciitar"))
-let cuotas = parseInt(prompt("ingrese cantidad de cuotas , no mayor a 20"))
 
-function pedircuotas(){
+const pedircuota=()=>{
     let cuotas = parseInt(prompt( " ingrese cantidad de cuotas , no mayor a 20"));
 
 while(cuotas > 20 || cuotas < 0){
     cuotas = parseInt(prompt("ingrese en cuantas cuotas , no mayor a 20 ni menor a 0"))
 }
-
 return cuotas; }
+
+const cuotas = pedircuota ()
 
 if( cuotas <= 10){
     monto = monto *1.1;
