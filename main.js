@@ -33,7 +33,7 @@ if (monto <= 10000){
 
 const Servicio = function (tarjeta, mantenimiento, limite){
    this.tarjeta = tarjeta
-   this.mantenimeinto = mantenimeinto
+   this.mantenimiento = mantenimiento
    this.limite = limite 
 }
 
@@ -42,23 +42,28 @@ let servicio2 = new Servicio ("platino",11000, 1000000 )
 let servicio3 = new Servicio ("black", 19000, 2000000)
 
 let lista =[ servicio1,servicio2,servicio3 ]
+let resultado
 
 function flitrarServicio(){
-    let pedirtarjeta = prmopt( "Por cual tarjeta quiere consultar")
-    let resultado = lista.filter ((banco)=> banco.tarjeta.include(pedirtarjeta))
+    let pedirtarjeta = prompt( "Por cual tarjeta quiere consultar")
+    resultado = lista.find (banco => banco.tarjeta == pedirtarjeta)
+    console.log(resultado)
+    return resultado
 }
 
-if(resultado === "gold" || resultado === "platino" || resultado === "black"){
-    console.table(restultado)
+const valor=flitrarServicio()
+console.log(valor)
+
+if ( valor.tarjeta === "gold" || valor.tarjeta === "platino" || valor.tarjeta === "black"){
+    console.table(resultado)
 }else{
     alert( " valor invaldido las opciones son gold, platino y black muchas gracias")
 }
 
-flitrarServicio()
 
 function incorporartarjeta(){
     let tarjeta = prompt ("ingresar nombre de la nueva tarjeta")
-    let mantenimiento = parseInt(prmopt ("ingresa el costo anual de la tarjeta"))
+    let mantenimiento = parseInt(prompt ("ingresa el costo anual de la tarjeta"))
     let limite = parseInt(prompt (" ingresa el limite mensual de la tarjeta"))
 
     if(isNaN(mantenimiento) || isNaN(limite)){ 
@@ -71,5 +76,6 @@ let servicio = new Servicio ( tarjeta,mantenimiento,limite)
 lista.push(servicio)
 console.table(lista)
 
+incorporartarjeta()
 }
 
