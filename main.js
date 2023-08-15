@@ -1,3 +1,4 @@
+/* 
 let cuota = 0
 let montototal = 0
 
@@ -29,7 +30,7 @@ if (monto <= 10000){
 }else{
     montototal = monto * 1.25;
     console.log("monto" + montototal)
-}
+}*/
 
 const Servicio = function (tarjeta, mantenimiento, limite){
    this.tarjeta = tarjeta
@@ -79,44 +80,64 @@ console.table(lista)
 incorporartarjeta()
 }
 
-let carrito=[]
+  
+  const carrito = [];
 
-function agregarmoneda(){
-    const monedas = document.getElementById("monedas")
-    const cantidad = document.getElementById("cantidad")
+  const monedasInput = document.getElementById("monedas");
+  const cantidadInput = document.getElementById("cantidad");
+  const carritoElement = document.getElementById("carrito");
+  const agregarBoton = document.getElementById("agregarBoton");
+  const guardarBoton = document.getElementById("guardarBoton");
 
-    if(isNaN(cantidad) && cantidad>0){
-        const item = {moneda,cantidad}
-        carrito.push(item)
-    }else{
-        alert("por favor ingresar valor valido")
-    }
-}
+  agregarBoton.addEventListener("click", agregarMoneda);
+  guardarBoton.addEventListener("click", guardarCarrito);
 
+  function agregarMoneda() {
+      const monedas = monedasInput.value;
+      const cantidad = parseFloat(cantidadInput.value);
 
-function actualizarcarrito (){
-  const carritoelement = document.getElementById("carrito")
-  carritoelement.innerHTML="";
-
-  carrito.forEach((item)=>{
-    const listitem = document.createElement("li")
-    listitem.textContent = `${item.monedas} - cantidad ${item.cantidad}`
-    carritoelement.appendChild(listitem)
-
-  })
-
-  function guardarcarrito(){
-    const carritoJSON = JSON.stringify(carrito)
-    localStorage.setItem("carritoData", carritoJSON)
-    alert("carrito guardar en localS")
+      if (!isNaN(cantidad) && cantidad > 0) {
+          carrito.push({ monedas, cantidad });
+          actualizarCarrito();
+          limpiarCampos();
+      } else {
+          alert("Por favor ingresa un valor válido");
+      }
   }
 
+  function actualizarCarrito() {
+      carritoElement.innerHTML = "";
 
-  function agregaralcarrito(){
-    const carritoJSON =localStorage.getItem("carritodata")
-    if(carritoJSON){
-        carrito = JSON.parse(carritoJSON)
-        actualizarcarrito()
-    }
+      carrito.forEach(item => {
+          const listitem = document.createElement("li");
+          listitem.textContent = `${item.monedas} - cantidad ${item.cantidad}`;
+          carritoElement.appendChild(listitem);
+      });
   }
-}
+
+  function guardarCarrito() {
+      if (typeof Storage !== "undefined") {
+          const carritoJSON = JSON.stringify(carrito);
+          localStorage.setItem("carritoData", carritoJSON);
+          alert("Carrito guardado en local S");
+          carrito.length = 0;
+          actualizarCarrito();
+      } else {
+          alert("Tu navegador no soporta local S");
+      }
+  }
+
+  function cargarCarritoDesdeLocalStorage() {
+      const carritoJSON = localStorage.getItem("carritoData");
+      if (carritoJSON) {
+          carrito.push(...JSON.parse(carritoJSON));
+          actualizarCarrito();
+      }
+  }
+
+  function limpiarCampos() {
+      monedasInput.value = "";
+      cantidadInput.value = "";
+  }
+
+  cargarCarritoDesdeLocalStorage();
