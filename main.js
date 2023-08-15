@@ -79,3 +79,44 @@ console.table(lista)
 incorporartarjeta()
 }
 
+let carrito=[]
+
+function agregarmoneda(){
+    const monedas = document.getElementById("monedas")
+    const cantidad = document.getElementById("cantidad")
+
+    if(isNaN(cantidad) && cantidad>0){
+        const item = {moneda,cantidad}
+        carrito.push(item)
+    }else{
+        alert("por favor ingresar valor valido")
+    }
+}
+
+
+function actualizarcarrito (){
+  const carritoelement = document.getElementById("carrito")
+  carritoelement.innerHTML="";
+
+  carrito.forEach((item)=>{
+    const listitem = document.createElement("li")
+    listitem.textContent = `${item.monedas} - cantidad ${item.cantidad}`
+    carritoelement.appendChild(listitem)
+
+  })
+
+  function guardarcarrito(){
+    const carritoJSON = JSON.stringify(carrito)
+    localStorage.setItem("carritoData", carritoJSON)
+    alert("carrito guardar en localS")
+  }
+
+
+  function agregaralcarrito(){
+    const carritoJSON =localStorage.getItem("carritodata")
+    if(carritoJSON){
+        carrito = JSON.parse(carritoJSON)
+        actualizarcarrito()
+    }
+  }
+}

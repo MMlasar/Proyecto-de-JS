@@ -6,7 +6,20 @@
     <title>Document</title>
 </head>
 <body>
- <h1>Hola mundo</h1>
+
+    <label for="monedas">monedas</label>
+    <input type="text" id="monedas" name="monedas"><br>
+
+    <label for="cantidad">monedas</label>
+    <input type="number" id="cantidad" name="cantidad">
+   
+
+    <button type="button" onclick="agregaralcarrito()"> agregar </button>
+    <button type="button" onclick="guardaralcarrito()"> guardar </button>
+
+    <ul id="carrito"></ul>
+
+
 
     <script src="main.js"></script>
 </body>
