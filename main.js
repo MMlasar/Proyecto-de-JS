@@ -58,7 +58,12 @@ console.log(valor)
 if ( valor.tarjeta === "gold" || valor.tarjeta === "platino" || valor.tarjeta === "black"){
     console.table(resultado)
 }else{
-    alert( " valor invaldido las opciones son gold, platino y black muchas gracias")
+    Swal.fire({
+        icon: 'error',
+        title: 'el valor no es valido',
+        text: ' Las opciones son Gold , Platino ; Black',
+        footer: '<a href="">Why do I have this issue?</a>'
+      });
 }
 
 
@@ -68,7 +73,7 @@ function incorporartarjeta(){
     let limite = parseInt(prompt (" ingresa el limite mensual de la tarjeta"))
 
     if(isNaN(mantenimiento) || isNaN(limite)){ 
-    alert("ingresar valores validos")
+        Swal.fire("Por favor ingresar valores validos");
     return;
 }
 
@@ -101,7 +106,7 @@ incorporartarjeta()
           actualizarCarrito();
           limpiarCampos();
       } else {
-          alert("Por favor ingresa un valor válido");
+         Swal.fire("Por favor ingresar valores validos");
       }
   }
 
@@ -123,7 +128,7 @@ incorporartarjeta()
           carrito.length = 0;
           actualizarCarrito();
       } else {
-          alert("Tu navegador no soporta local S");
+        Swal.fire("Tu navegador no soporta Local S");
       }
   }
 
@@ -141,3 +146,27 @@ incorporartarjeta()
   }
 
   cargarCarritoDesdeLocalStorage();
+
+
+  fetch("productos.json")
+  .then(response => response.json())
+  .then(data => {
+
+    Const tarjetas = data.tarjetas;
+
+    Const Tarjetascontainer = document.getElementById("tarjetas-container")
+
+    tarjetas.forEach((x)=>{
+        const tarjetasElement = document.createElement ("p")
+        tarjetasElement.innerText =`servicio: ${x.servicio}, mantenimiento: ${x.mantenimiento},
+        limite:${x.limite}`
+        Tarjetascontainer.appendChild(tarjetasElement)
+    })
+})
+.catch(error => {
+    console.error("Error:", error);
+    Swal.fire("Error en el sistema. Vuelve a cargar.");
+  });
+    
+
+
