@@ -2,29 +2,28 @@
     "Tarjetas": [
         {
             "servicio": "Naranja max",
-            "mantenimiento": 4000 ,
-            "Limite":350000,
-        }
+            "mantenimiento": 4000,
+            "Limite": 350000
+        },
         {
             "servicio": "Gold Max",
-            "mantenimiento": 8500 ,
-            "Limite":680000,
-        }
+            "mantenimiento": 8500,
+            "Limite": 680000
+        },
         {
             "servicio": "Patino max",
-            "mantenimiento": 14000 ,
-            "Limite":1500000,
-        }
+            "mantenimiento": 14000,
+            "Limite": 1500000
+        },
         {
             "servicio": "Black Premium",
-            "mantenimiento": 35000 ,
-            "Limite":4500000,
-        }
+            "mantenimiento": 35000,
+            "Limite": 4500000
+        },
         {
             "servicio": "Socio Black Premium",
-            "mantenimiento": 50000 ,
-            "Limite":8000000,
+            "mantenimiento": 50000,
+            "Limite": 8000000
         }
-
     ]
 }

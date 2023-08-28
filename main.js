@@ -148,25 +148,23 @@ incorporartarjeta()
   cargarCarritoDesdeLocalStorage();
 
 
-  fetch("productos.json")
+  fetch("./productos.json")
   .then(response => response.json())
   .then(data => {
+    console.log(data);
+    
+    const tarjetas = data.Tarjetas;
 
-    Const tarjetas = data.tarjetas;
+    const Tarjetascontainer = document.getElementById("tarjetas-container");
 
-    Const Tarjetascontainer = document.getElementById("tarjetas-container")
-
-    tarjetas.forEach((x)=>{
-        const tarjetasElement = document.createElement ("p")
-        tarjetasElement.innerText =`servicio: ${x.servicio}, mantenimiento: ${x.mantenimiento},
-        limite:${x.limite}`
-        Tarjetascontainer.appendChild(tarjetasElement)
-    })
+    tarjetas.forEach((x) => {
+        const tarjetasElement = document.createElement("p");
+        tarjetasElement.innerText = `servicio: ${x.servicio}, mantenimiento: ${x.mantenimiento}, limite: ${x.Limite}`;
+        Tarjetascontainer.appendChild(tarjetasElement);
+    });
 })
 .catch(error => {
-    console.error("Error:", error);
-    Swal.fire("Error en el sistema. Vuelve a cargar.");
-  });
-    
+    console.log("fetch error:", error);
+});
 
 
