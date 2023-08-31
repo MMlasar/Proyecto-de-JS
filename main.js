@@ -1,36 +1,4 @@
-/* 
-let cuota = 0
-let montototal = 0
 
-let monto = parseFloat(prompt("ingrese mono a solciitar"))
-
-const pedircuota=()=>{
-    let cuotas = parseInt(prompt( " ingrese cantidad de cuotas , no mayor a 20"));
-
-while(cuotas > 20 || cuotas < 0){
-    cuotas = parseInt(prompt("ingrese en cuantas cuotas , no mayor a 20 ni menor a 0"))
-}
-return cuotas; }
-
-const cuotas = pedircuota ()
-
-if( cuotas <= 10){
-    monto = monto *1.1;
-    console.log("cuotas" + monto)
-}else{
-    monto = monto * 1.2;
-    console.log("cuotas " + monto)
-}
-if (monto <= 10000){
-    montototal = monto * 1.1;
-    console.log("montototal" +montototal)
-}else if( monto > 10000 && monto < 20000){
-    montototal = monto *1.15;
-    console.log("montototal" +montototal)
-}else{
-    montototal = monto * 1.25;
-    console.log("monto" + montototal)
-}*/
 
 const Servicio = function (tarjeta, mantenimiento, limite){
    this.tarjeta = tarjeta
@@ -45,47 +13,42 @@ let servicio3 = new Servicio ("black", 19000, 2000000)
 let lista =[ servicio1,servicio2,servicio3 ]
 let resultado
 
-function flitrarServicio(){
-    let pedirtarjeta = prompt( "Por cual tarjeta quiere consultar")
-    resultado = lista.find (banco => banco.tarjeta == pedirtarjeta)
-    console.log(resultado)
-    return resultado
+function flitrarServicio() {
+    const pedirTarjetaInput = document.getElementById("monedas");
+    const pedirTarjeta = pedirTarjetaInput.value;
+
+    resultado = lista.find(banco => banco.tarjeta === pedirTarjeta);
+    return resultado;
 }
 
-const valor=flitrarServicio()
-console.log(valor)
+const valor = flitrarServicio();
 
-if ( valor.tarjeta === "gold" || valor.tarjeta === "platino" || valor.tarjeta === "black"){
-    console.table(resultado)
-}else{
-    Swal.fire({
-        icon: 'error',
-        title: 'el valor no es valido',
-        text: ' Las opciones son Gold , Platino ; Black',
-        footer: '<a href="">Why do I have this issue?</a>'
-      });
+const incorporarBoton = document.getElementById("incorporarBoton");
+
+incorporarBoton.addEventListener("click", incorporarTarjeta);
+
+function incorporarTarjeta() {
+    const nuevaTarjetaInput = document.getElementById("nuevaTarjeta");
+    const costoAnualInput = document.getElementById("costoAnual");
+    const limiteMensualInput = document.getElementById("limiteMensual");
+
+    const nuevaTarjeta = nuevaTarjetaInput.value;
+    const costoAnual = parseInt(costoAnualInput.value);
+    const limiteMensual = parseInt(limiteMensualInput.value);
+
+    if (isNaN(costoAnual) || isNaN(limiteMensual)) {
+        Swal.fire("Por favor ingresar valores válidos");
+        return;
+    }
+
+    let servicio = new Servicio(nuevaTarjeta, costoAnual, limiteMensual);
+
+    lista.push(servicio);
+    console.table(lista);
 }
 
 
-function incorporartarjeta(){
-    let tarjeta = prompt ("ingresar nombre de la nueva tarjeta")
-    let mantenimiento = parseInt(prompt ("ingresa el costo anual de la tarjeta"))
-    let limite = parseInt(prompt (" ingresa el limite mensual de la tarjeta"))
 
-    if(isNaN(mantenimiento) || isNaN(limite)){ 
-        Swal.fire("Por favor ingresar valores validos");
-    return;
-}
-
-let servicio = new Servicio ( tarjeta,mantenimiento,limite)
-
-lista.push(servicio)
-console.table(lista)
-
-incorporartarjeta()
-}
-
-  
   const carrito = [];
 
   const monedasInput = document.getElementById("monedas");
